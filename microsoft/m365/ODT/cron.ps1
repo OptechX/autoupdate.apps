@@ -23,8 +23,14 @@ Get-ChildItem -Path "C:\Program Files\OfficeDeploymentTool\*.exe" | ForEach-Obje
     $v = [System.Diagnostics.FileVersionInfo]::GetVersionInfo($_).FileVersion.ToString()
     Write-Output "Office Deployment Tool Version: ${v}"
 }
-Invoke-WebRequest  -UseBasicParsing -Uri $configuration_xml -OutFile "C:\Program Files\OfficeDeploymentTool\Configuration.xml" -DisableKeepAlive
-Start-Process -FilePath "C:\Program Files\OfficeDeploymentTool\setup.exe" -ArgumentList "/conifgure","`"C:\Program Files\OfficeDeploymentTool\Configuration.xml`"" -Wait
+Start-Sleep -Seconds 5
+Invoke-WebRequest -UseBasicParsing -Uri $configuration_xml -OutFile "C:\Program Files\OfficeDeploymentTool\Configuration.xml" -DisableKeepAlive
+if (Test-Path -Path "C:\Program Files\OfficeDeploymentTool\Configuration.xml") {
+    Start-Process -FilePath "C:\Program Files\OfficeDeploymentTool\setup.exe" -ArgumentList "/conifgure","`"C:\Program Files\OfficeDeploymentTool\Configuration.xml`"" -Wait
+}
+else {
+    Write-Output "Test incomplete"
+}
 
 <# after build #>
 Remove-Item -Path $root_path -Confirm:$false -Force -Recurse
