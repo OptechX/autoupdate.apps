@@ -3,4 +3,4 @@ skip_tags: true
 image: Visual Studio 2019
 shallow_clone: true
 build_script:
-- ps: ./microsoft/m365/ODT/cron.ps1
+- ps: Get-ChildItem -Path . -Recurse -Filter "cron.ps1" | ForEach-Object { . $_.FullName }
