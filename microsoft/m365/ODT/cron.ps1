@@ -17,3 +17,6 @@ Invoke-WebRequest -Uri $download_url -OutFile "${root_path}\odt_current.exe" -Us
 <# setup #>
 Start-Process -FilePath "${root_path}\odt_current.exe" -ArgumentList "/quiet","/passive","/extract:`"C:\Program Files\OfficeDeploymentTool`"" -Wait
 Remove-Item -Path "C:\Program Files\OfficeDeploymentTool\*.xml" -Confirm:$false -Force
+Get-ChildItem -Path "C:\Program Files\OfficeDeploymentTool\*.exe" | ForEach-Object {
+    [System.Diagnostics.FileVersionInfo]::GetVersionInfo($_).FileVersion
+}
