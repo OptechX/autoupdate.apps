@@ -24,8 +24,8 @@ Get-ChildItem -Path "C:\Program Files\OfficeDeploymentTool\*.exe" | ForEach-Obje
     Write-Output "Office Deployment Tool Version: ${v}"
 }
 Invoke-WebRequest  -UseBasicParsing -Uri $configuration_xml -OutFile "C:\Program Files\OfficeDeploymentTool\Configuration.xml" -DisableKeepAlive
-Start-Process -FilePath "C:\Program Files\OfficeDeploymentTool\setup.exe" -ArgumentList "/conifgure","`"C:\Program Files\OfficeDeploymentTool\Configuration.xml`"" -Wait
+# Start-Process -FilePath "C:\Program Files\OfficeDeploymentTool\setup.exe" -ArgumentList "/conifgure","`"C:\Program Files\OfficeDeploymentTool\Configuration.xml`"" -Wait
 
-<# after build #>
-Remove-Item -Path $root_path -Confirm:$false -Force -Recurse
-Remove-Item -Path "C:\Program Files\OfficeDeploymentTool\Configuration.xml" -Confirm:$false -Force
+# <# after build #>
+# Remove-Item -Path $root_path -Confirm:$false -Force -Recurse
+# Remove-Item -Path "C:\Program Files\OfficeDeploymentTool\Configuration.xml" -Confirm:$false -Force
