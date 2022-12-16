@@ -26,12 +26,18 @@ Get-ChildItem -Path "C:\Program Files\OfficeDeploymentTool\*.exe" | ForEach-Obje
 Start-Sleep -Seconds 5
 Invoke-WebRequest -UseBasicParsing -Uri $configuration_xml -OutFile "C:\Program Files\OfficeDeploymentTool\Configuration.xml" -DisableKeepAlive
 if (Test-Path -Path "C:\Program Files\OfficeDeploymentTool\Configuration.xml") {
-    Start-Process -FilePath "C:\Program Files\OfficeDeploymentTool\setup.exe" -ArgumentList "/conifgure","`"C:\Program Files\OfficeDeploymentTool\Configuration.xml`"" -Wait
+    Start-Process -FilePath "C:\Program Files\OfficeDeploymentTool\setup.exe" -ArgumentList "/configure","`"C:\Program Files\OfficeDeploymentTool\Configuration.xml`"" -Wait
 }
 else {
-    Write-Output "Test incomplete"
+    Write-Output "Build incomplete"
 }
 
 <# after build #>
 Remove-Item -Path $root_path -Confirm:$false -Force -Recurse
 Remove-Item -Path "C:\Program Files\OfficeDeploymentTool\Configuration.xml" -Confirm:$false -Force
+if (-not(Test-Path -Path "C:\Program Files\OfficeDeploymentTool\Configuration.xml")) {
+    Write-Output "Post build complete"
+}
+else {
+    Write-Output "Post build incomplete"
+}
