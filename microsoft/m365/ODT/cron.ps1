@@ -16,4 +16,4 @@ Invoke-WebRequest -Uri $download_url -OutFile "${root_path}\odt_current.exe" -Us
 
 <# setup #>
 Start-Process -FilePath "${root_path}\odt_current.exe" -ArgumentList "/quiet","/passive","/extract:`"C:\Program Files\OfficeDeploymentTool`"" -Wait
-Get-ChildItem -Path "C:\Program Files\OfficeDeploymentTool"
+Remove-Item -Path "C:\Program Files\OfficeDeploymentTool\*.xml" -Confirm:$false -Force
